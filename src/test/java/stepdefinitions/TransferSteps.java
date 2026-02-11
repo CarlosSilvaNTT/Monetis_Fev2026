@@ -13,7 +13,6 @@ import java.time.Duration;
 public class TransferSteps {
 
     private WebDriver driver;
-
     private LoginPage loginPage;
     private AccountsPage accountsPage;
     private TransferPage transferPage;

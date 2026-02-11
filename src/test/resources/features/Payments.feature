@@ -11,7 +11,7 @@ Then Verify new transaction appears with "<CATEGORY>" category and <AMOUNT> amou
 
 Examples:
   | ACCOUNT  | REFERENCE  | ENTITY | AMOUNT | CATEGORY |
-  | checking | INV-001232 | 12345  | 100    | house    |
-#| car       | INV-901211  | 12333  | 500    | car      |
+  | checking | INV-902438 | 12345  | 100    | house    |
+#  | car      | INV-944438 | 12333  | 500    | car      |
   | bills    | INV-909923 | 22123  | 200    | bills    |
   | checking | INV-990022 | 33221  | 150    | mobile   |

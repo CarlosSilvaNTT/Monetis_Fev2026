@@ -13,7 +13,7 @@ import java.time.Duration;
 
 public class LoginPage {
     private final WebDriverWait wait;
-    WebDriver driver;
+    private final WebDriver driver;
 
     @FindBy(xpath = ("//span[normalize-space()='Get Started']"))
     WebElement getStartedButton;
@@ -64,13 +64,14 @@ public class LoginPage {
 
     public void enterUsername(String username) {
 
-
+        wait.until(ExpectedConditions.visibilityOf(usernameField));
         usernameField.clear(); //  limpar
         usernameField.sendKeys(username);
 
     }
 
     public void enterPassword(String password) {
+        wait.until(ExpectedConditions.visibilityOf(passwordField));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
