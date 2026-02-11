@@ -35,16 +35,15 @@ public class LoginSteps {
 
     @When("I enter a valid username {string}")
     public void i_enter_a_valid_username(String ignored) {
-        Dotenv dotenv = Dotenv.load();
         String username = dotenv.get("USER"); // pega o valor completo do .env
 
 
 
-// Debug opcional para confirmar
-        System.out.println("Username carregado do .env: " + dotenv.get("USER"));
+       // Debug opcional para confirmar
+       // System.out.println("Username carregado do .env: " + dotenv.get("USER"));
 
 
-        loginPage.enterUsername(username);
+        loginPage.loginUsingEnvCredentials();
 
     }
 
@@ -58,12 +57,12 @@ public class LoginSteps {
             password = dotenv.get("PASSWORD");
         }
 
-        loginPage.enterPassword(password);
+        loginPage.loginUsingEnvCredentials();
     }
 
     @And("I click the login button")
     public void i_click_the_login_button() {
-        loginPage.clickLoginButton();
+        loginPage.loginUsingEnvCredentials();
     }
 
     @Then("I should be redirected to the dashboard page")

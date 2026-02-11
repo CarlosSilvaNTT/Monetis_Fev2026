@@ -36,14 +36,7 @@ public class PaymentsSteps {
         accountsPage = new AccountsPage(driver);
         paymentsPage = new PaymentsPage(driver);
 
-        Dotenv env = Dotenv.load();
-        String username = env.get("USER");
-        String password = env.get("PASSWORD");
-
-        loginPage.clickGetStarted();
-        loginPage.enterUsername(username);
-        loginPage.enterPassword(password);
-        loginPage.clickLoginButton();
+        loginPage.loginUsingEnvCredentials();
 
         accountsPage.clickPaymentsNav();
         paymentsPage.waitLoaded();
@@ -105,6 +98,7 @@ public class PaymentsSteps {
     @Then("Verify success payment page appears")
     public void verify_success_payment_page() {
         Assert.assertTrue("Success NOT visible", paymentsPage.isSuccessVisible());
+        paymentsPage.closeSuccessScreen();
     }
 
     // ============================================================

@@ -37,10 +37,7 @@ public class TransferSteps {
         String password = dotenv.get("PASSWORD");
 
         // Login flow
-        loginPage.clickGetStarted();
-        loginPage.enterUsername(username);
-        loginPage.enterPassword(password);
-        loginPage.clickLoginButton();
+        loginPage.loginUsingEnvCredentials();
 
         // --- Accounts: capture balances BEFORE transfer ---
         accountsPage.waitLoaded();

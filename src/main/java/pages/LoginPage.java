@@ -1,5 +1,6 @@
 package pages;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +43,15 @@ public class LoginPage {
 
     }
 
+
+
+    public void loginUsingEnvCredentials() {
+        Dotenv env = Dotenv.load();
+        clickGetStarted();
+        enterUsername(env.get("USER"));
+        enterPassword(env.get("PASSWORD"));
+        clickLoginButton();
+    }
 
 
     public void clickGetStarted() {

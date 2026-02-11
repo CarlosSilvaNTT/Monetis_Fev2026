@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
 import java.math.BigDecimal;
@@ -55,6 +56,8 @@ public class PaymentsPage {
             By.xpath("//div[contains(@class,'status')]//span[normalize-space()='Confirmation']");
     private static final By STATUS_SUCCESS =
             By.xpath("//div[contains(@class,'status')]//span[normalize-space()='Success']");
+
+    private static final By closeButton = By.xpath("//button[normalize-space()='Close']");
 
     public PaymentsPage(WebDriver driver) {
         this.driver = driver;
@@ -153,6 +156,40 @@ public class PaymentsPage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+    public void closeSuccessScreen() {
+
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(closeButton));
+        btn.click();
+
+     // scroll into view just in case
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});", btn);
+        // 2) Try normal click
+        try {
+            btn.click();
+        } catch (Exception e1) {
+
+            // 3) Try Actions class click
+            try {
+                new Actions(driver).moveToElement(btn).click().perform();
+            } catch (Exception e2) {
+
+                // 4) FINAL fallback → JS click (never fails)
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+            }
+        }
+        // wait for success panel to disappear
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(closeButton));
+
+        // 6) Also wait overlay to finish (Monetis uses a slow fade)
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                    By.cssSelector("div.loading_screen")));
+        } catch (TimeoutException ignore) {
+            // Overlay may already be hidden — safe to ignore
+        }
+
     }
 
     // ============================================================

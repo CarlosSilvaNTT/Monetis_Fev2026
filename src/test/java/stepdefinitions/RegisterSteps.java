@@ -91,11 +91,7 @@ public class RegisterSteps {
         if (loginPage == null) loginPage = new LoginPage(Hooks.getDriver());
 //comment
 
-        String username = dotenv.get("USER");
-        loginPage.enterUsername(username);
-        String password = dotenv.get("PASSWORD");
-        loginPage.enterPassword(password);
-        loginPage.clickLoginButton();
+        loginPage.loginUsingEnvCredentials();
 
     }
 
